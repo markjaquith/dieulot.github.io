@@ -1,0 +1,53 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>InstantClick: Whitelist links</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="If you need to whitelist links, here’s how.">
+<body>
+<div id="header">
+  <h1><a href=".">InstantClick</a></h1>
+  <div id="progress">Latest version: <strong><a href="https://raw.github.com/dieulot/instantclick/v1.0/instantclick.js" target="_blank">1.0</a></strong>, released 2014/01/08. <a href="https://twitter.com/instantclickjs" target="_blank" title="@instantclickjs">Follow progress on Twitter</a></div>
+  <ul>
+    <li><a href=".">Home</a>
+    <li><a href="click-test.html">Click test</a>
+    <li><a href="whitelist.html">Whitelist</a>
+    <li><a href="license.html">License</a>
+  </ul>
+</div>
+<h2>Whitelisting links</h2>
+
+<p>If you need to whitelist links in your website, you’ll have to pass a function to <code>InstantClick.init()</code>, this function can take two parameters: <code>path</code> is the path of the link (pathname for this page is “whitelist.html”); <code>elem</code> (optional) is the &lt;a&gt; element, so you can check his attributes or where it belongs in the DOM.
+
+<p>Make the function return <code>true</code> if you want InstantClick to act on this link,  <code>false</code> otherwise.
+
+<p>Here is an example function, for allowing only links when their path starts with “/mysubdirectory/”:
+
+<p><code>InstantClick.init(function(path, elem) {
+        var start = '/mysubdirectory/';
+        var extensions = ['', 'htm', 'html', 'php'];
+
+        // Every path must begin with `start`
+        if (path.indexOf(start) != 0) {
+                return false;
+        }
+
+        // Get URL without ?search and #hash,
+        // and without `start`
+        var a = document.createElement('a');
+        a.href = path;
+        path = a.pathname.substr(start.length);
+
+        // Check extension
+        var split = path.split('.');
+        var ext = split.pop();
+        if (split.length == 0) {
+                ext = '';
+        }
+        if (extensions.indexOf(ext) == -1) {
+                return false;
+        }
+
+        return true;
+})</code>
+<script src="script.js" data-no-instant></script>

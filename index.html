@@ -1,1 +1,94 @@
-Hello
+<!doctype html>
+<meta charset="utf-8">
+<title>InstantClick – JS lib to speed up your website</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="InstantClick makes following links in your website instant.">
+<body>
+<div id="header">
+  <h1><a href=".">InstantClick</a></h1>
+  <div id="progress">Latest version: <strong><a href="https://raw.github.com/dieulot/instantclick/v1.0/instantclick.js" target="_blank">1.0</a></strong>, released 2014/01/08. <a href="https://twitter.com/instantclickjs" target="_blank" title="@instantclickjs">Follow progress on Twitter</a></div>
+  <ul>
+    <li><a href=".">Home</a>
+    <li><a href="click-test.html">Click test</a>
+    <li><a href="whitelist.html">Whitelist</a>
+    <li><a href="license.html">License</a>
+  </ul>
+</div>
+<h3>What is it</h3>
+
+<p>InstantClick is a JavaScript library that dramatically speeds up your website, making navigation effectively instant in most cases.
+
+<h3>Why</h3>
+
+<p>Despite the huge bandwidth increases, websites don’t get much faster.
+
+<p>This is because the biggest botteneck in loading web pages is latency. <sup id="note-latency-back"><a href="#note-latency">1</a></sup>
+
+<h3>How does it work</h3>
+
+<p>Latency is inevitable with today’s internet architecture so InstantClick cheats by preloading links you are likely to click on.
+
+<p>Before a visitor clicks on a link, he hovers over that link. Between these two events, 200 ms to 300 ms usually pass by (<a href="click-test.html">test yourself here</a>). InstantClick makes use of that time to preload the page, so that when you click the page is already there.
+
+<p>InstantClick uses pushState and AJAX (a combo known as <a href="https://github.com/defunkt/jquery-pjax" target="_blank">pjax</a>).
+
+<p>AJAX brings two nice side benefits:
+<ul>
+  <li>Your browser doesn’t have to throw and then recalculate styles and scripts every time you go to another page; this is especially nice for mobiles.
+  <li>You don’t get a white flash while your browser is waiting for a page to display, this make a website feel fasters.
+</ul>
+
+<p>If your browser doesn’t <a href="http://caniuse.com/#search=pushstate" target="_blank">support pushState</a>, InstantClick fully degrades.
+
+<h3>Getting started</h3>
+
+<p><a href="https://raw.github.com/dieulot/instantclick/v1.0/instantclick.js" target="_blank">Download</a>, then add the following to your HTML before <code>&lt;/body&gt;</code>:<br>
+<code>&lt;script src="instantclick.js" data-no-instant&gt;&lt;/script&gt;
+&lt;script&gt;InstantClick.init();&lt;/script&gt;</code>
+
+<p class="beware"><strong>BEWARE:</strong> If you add InstantClick to an already-started project, you have to be extra-careful to not make it preload links that trigger an action, such as a delete link.
+
+<p>If a link has to not be preloaded, add a <code>data-no-instant</code> attribute to the link, like so:<br>
+<code>&lt;a href="delete?id=43" data-no-instant&gt;Delete&lt;/a&gt;</code>
+
+<p>If your website is already big and blacklisting every potentially harmful link is too much work, you can <a href="whitelist.html">whitelist</a> links instead.
+
+<p>With InstantClick, page changes will no longer trigger <code>DOMContentLoaded</code>, if you need to use JavaScript, call it on <code>page:change</code>:<br>
+<code>addEventListener('page:change', function() {
+    alert('page change!');
+})</code>
+
+<h3>Gotchas</h3>
+
+<p>Because of preloading, InstantClick trigger more requests to your server. I haven’t yet measured how much more. If you have a low-traffic website it shouldn’t be a problem, if you have a lot of traffic you’ll have to be careful. If you use InstantClick, please <a href="#adieulot_at_gmail" id="email">email me</a> your experience. Solutions to deal with frail servers will be explored in the future (see What’s coming next below).
+
+<script>document.getElementById('email').href = 'mailto:' + ['adieulot', 'gmail.com'].join('@')</script>
+
+<p>As InstantClick technically makes your website a single-page application, a lot of javascript scripts might not work correctly with it. Clues on how to make work some of them may be found at <a href="http://reed.github.io/turbolinks-compatibility/" target="_blank">Turbolinks Compatibility</a>.
+
+<p>InstantClick changes only the title and the body’s inner HTML. If you have attributes in your body (such as class or id), they won’t be applied on page change. Also, make sure you declare your <code>&lt;body&gt;</code> (optional in HTML5), InstantClick needs it.
+
+<p>If you spot a bug, <a href="https://github.com/dieulot/instantclick/issues" target="_blank">report it on GitHub</a>.
+
+<h3>What’s coming next</h3>
+
+<p>You can participate to InstantClick’s development on <a href="https://github.com/dieulot/instantclick" target="_blank">Github</a>. You can follow InstantClick’s news on <a href="https://twitter.com/instantclickjs" target="_blank">Twitter</a>.
+
+<p>What I have planned for InstantClick next (more or less by decreasing priority):
+<ul>
+  <li>Possibility to add a delay before preloading kicks in, this would help not overwhelm servers.
+  <li>Possibility to preloads on “mousedown”, this is when you press your mouse button (a click happens when you release it); this option would still give a nice speed boost (leaves approximately 50ms to start preloading, and retains a single-page application’s benefits) with nearly zero overhead for the server.
+  <li>Preloading on “touchstart”, so that mobile devices can preload too.
+  <li>Add body’s attributes (such as class and id) on page change.
+  <li>Adding an optional progress bar (à la <a href="http://ricostacruz.com/nprogress/" target="_blank">NProgress</a>, but not fake), would be useful when a page takes more than <a href="http://www.nngroup.com/articles/response-times-3-important-limits/" target="_blank" title="Response Times: The 3 Important Limits – Jakob Nielsen">100ms</a> after click to display. Using AJAX doesn’t trigger the browser’s loading indicator.
+  <li>Getting statistics on how much additional load InstantClick puts on a server.
+  <li>Evaluating if stopping preloading when we quit hovering over a link would be a good idea.
+</ul>
+
+<h3>Footnotes</h3>
+
+<ol>
+  <li id="note-latency">Check out <a href="http://www.igvita.com/2012/07/19/latency-the-new-web-performance-bottleneck/" target="blank">Latency: The New Web Performance Bottleneck</a> for numbers and stuff about bandwidth vs. latency effects on web pages. <a href="#note-latency-back" class="noteBack">↩</a>
+</ol>
+<script src="script.js" data-no-instant></script>

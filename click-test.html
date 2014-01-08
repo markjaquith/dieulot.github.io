@@ -1,0 +1,86 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>InstantClick: Test your click speed</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tells you the delay between your hover/mousedown and click.">
+<body>
+<div id="header">
+  <h1><a href=".">InstantClick</a></h1>
+  <div id="progress">Latest version: <strong><a href="https://raw.github.com/dieulot/instantclick/v1.0/instantclick.js" target="_blank">1.0</a></strong>, released 2014/01/08. <a href="https://twitter.com/instantclickjs" target="_blank" title="@instantclickjs">Follow progress on Twitter</a></div>
+  <ul>
+    <li><a href=".">Home</a>
+    <li><a href="click-test.html">Click test</a>
+    <li><a href="whitelist.html">Whitelist</a>
+    <li><a href="license.html">License</a>
+  </ul>
+</div>
+<h2>Click test</h2>
+
+<p>This page will tell you the delay between your hover/mousedown and click.
+
+<table id="click-test">
+  <tr>
+    <th>Normal link
+    <th>Big link
+  <tr>
+    <td><a id="link1" href="#" data-no-instant>Click me</a>
+    <td><a id="link2" href="#" data-no-instant>Click me</a>
+  <tr class="results">
+    <td>
+      <p>Click − Hover = <strong id="link1-click-hover"></strong><br>
+      Click − Mousedown = <strong id="link1-click-mousedown"></strong>
+      <p class="times">Hover: <span id="link1-hover"></span><br>
+      Mousedown: <span id="link1-mousedown"></span><br>
+      Click: <span id="link1-click"></span>
+    <td>
+
+      <p>Click − Hover = <strong id="link2-click-hover"></strong><br>
+      Click − Mousedown = <strong id="link2-click-mousedown"></strong>
+      <p class="times">Hover: <span id="link2-hover"></span><br>
+      Mousedown: <span id="link2-mousedown"></span><br>
+      Click: <span id="link2-click"></span>
+</table>
+
+<script>
+function $(id) {
+  return document.getElementById(id)
+}
+
+var times = {hover: 0, mousedown: 0, click: 0}
+
+$('link1').addEventListener('mouseover', function() {
+  times.hover = +new Date
+})
+$('link2').addEventListener('mouseover', function() {
+  times.hover = +new Date
+})
+
+$('link1').addEventListener('mousedown', function() {
+  times.mousedown = +new Date
+})
+$('link2').addEventListener('mousedown', function() {
+  times.mousedown = +new Date
+})
+
+$('link1').addEventListener('click', function(e) {
+  e.preventDefault()
+  times.click = +new Date
+  $('link1-hover').innerHTML = times.hover
+  $('link1-mousedown').innerHTML = times.mousedown
+  $('link1-click').innerHTML = times.click
+  $('link1-click-hover').innerHTML = (times.click - times.hover) + ' ms'
+  $('link1-click-mousedown').innerHTML = (times.click - times.mousedown) + ' ms'
+})
+$('link2').addEventListener('click', function(e) {
+  e.preventDefault()
+  times.click = +new Date
+  $('link2-hover').innerHTML = times.hover
+  $('link2-mousedown').innerHTML = times.mousedown
+  $('link2-click').innerHTML = times.click
+  $('link2-click-hover').innerHTML = (times.click - times.hover) + ' ms'
+  $('link2-click-mousedown').innerHTML = (times.click - times.mousedown) + ' ms'
+})
+
+</script>
+<script src="script.js" data-no-instant></script>
