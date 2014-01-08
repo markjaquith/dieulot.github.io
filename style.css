@@ -3,6 +3,7 @@ body {
 	color: #111;
 	max-width: 600px;
 	margin: 15px auto 100px;
+	overflow-y: scroll;
 }
 
 #header h1 {
