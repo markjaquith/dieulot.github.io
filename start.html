@@ -1,0 +1,90 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>InstantClick: Getting started</title>
+<link rel="stylesheet" href="style-1.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Get started with InstantClick.">
+<body>
+<div id="header">
+  <h1><a href=".">InstantClick</a></h1>
+  <div id="follow">Follow progress on Twitter: <a href="https://twitter.com/intent/follow?screen_name=instantclickjs" target="_blank"><i></i> @instantclickjs</a></div>
+  <div id="progress">Latest version: <strong><a href="start.html">1.1</a></strong>, released 2014/01/16.</div>
+  <ul>
+    <li><a href=".">Home</a>
+    <li><a href="start.html">Getting started</a>
+    <li><a href="click-test.html">Click test</a>
+    <li><a href="changelog.html">Changelog</a>
+  </ul>
+</div>
+<h2>Getting started</h2>
+
+<p>Grab InstantClick:
+
+<p><a href="instantclick.min.js" target="_blank" class="download DOWNLOAD">Minified, for production</a> <small>1.4k when gzipped</small>
+
+<p><a href="https://raw.github.com/dieulot/instantclick/v1.1/instantclick.js" target="_blank" class="download">Unminified, for development</a> <small>6.2k</small>
+
+<p>There are two ways to use InstantClick, by whitelisting what InstantClick preloads (default), or by blacklisting. In general, you’ll use whitelisting on an already made website, and blacklisting if you start one from scratch.
+
+<h3>How to whitelist</h3>
+
+<p>Add the following to your HTML, before <code>&lt;/body&gt;</code>:<br>
+<code>&lt;script src="instantclick.min.js" data-no-instant&gt;&lt;/script&gt;
+&lt;script data-no-instant&gt;InstantClick.init();&lt;/script&gt;</code>
+
+<p>To whitelist a link, add a <code>data-instant</code> attribute to it:<br>
+<code>&lt;a href="other-page.html" <b>data-instant</b>&gt;This link will get preloaded.&lt;/a&gt;
+&lt;a href="/blog/"&gt;This link won’t.&lt;/a&gt;</code>
+
+<p>What to <b>NOT</b> whitelist:
+  <ul>
+    <li>Links pointing to an action, such as delete and logout links.
+    <li>Links pointing to non-HTML content that take a while to load.
+    <li>Links pointing to a page with different styles/scripts in the <code>&lt;head&gt;</code>.
+  </ul>
+
+
+<p>Some links can’t be preloaded: Links with a <code>target</code> attribute, with a different domain or protocol, or who points to an #anchor on the same page.
+
+<div class="blacklist">
+  <h3>How to blacklist</h3>
+
+  <p>Add instead the following to your HTML, before <code>&lt;/body&gt;</code>:<br>
+<code>&lt;script src="instantclick.min.js" data-no-instant&gt;&lt;/script&gt;
+&lt;script data-no-instant&gt;InstantClick.init(<b>true</b>);&lt;/script&gt;</code>
+
+  <p>All your links are now ready to get preloaded. To blacklist a link, add it a <code>data-no-instant</code> attribute.
+
+  <p>Links that can’t be preloaded are enumerated in “How to whitelist” above, they don’t need a <code>data-no-instant</code> attribute. To know what to blacklist check out “What to not whitelist” above.
+</div>
+
+<h3 id="scripts">Scripts</h3>
+
+<p>Besides the heavier load on your server, the real price to make your website instant is that you’ll have to revisit how your scripts are architectured. Because of AJAX, there’s no <code>DOMContentLoaded</code> firing on page changes anymore.
+
+<p>If there is a script in the body that you wish not to re-evaluate when InstantClick displays a page, add a <code>data-no-instant</code> attribute to it:<br>
+<code>&lt;script <b>data-no-instant</b>&gt;alert("I’m run only once.");&lt;/script&gt;
+&lt;script&gt;alert("I’m run every time a new page displays.");&lt;/script&gt;</code>
+
+<p>You can have a callback executed on every page change by using <code>InstantClick.on('change', callback)</code>.<br>
+If you want the callback to be called on the initial page (you probably do), make sure to call <code>InstantClick.on</code> before <code>InstantClick.init</code>.
+
+<p>For instance, here is how to make Google Analytics work with InstantClick:
+<code>&lt;script src="instantclick.min.js" data-no-instant&gt;&lt;/script&gt;
+&lt;script data-no-instant&gt;
+<small>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');</small>
+
+ga('create', 'UA-XXXXXXXX-X', 'example.com');
+
+InstantClick.on('change', function() {
+  ga('send', 'pageview');
+});
+
+InstantClick.init();
+&lt;/script&gt;</code>
+
+<p>If you have other third-party scripts that fail with InstantClick, you might get an idea on how to work around the problem by checking the <a href="http://reed.github.io/turbolinks-compatibility/" target="_blank">Turbolinks Compatibility</a> project.
+<script src="script-1.js" data-no-instant></script>
