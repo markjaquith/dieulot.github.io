@@ -1,23 +1,24 @@
 <!doctype html>
 <meta charset="utf-8">
 <title>InstantClick: Test your click speed</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style-1.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Tells you the delay between your hover/mousedown and click.">
 <body>
 <div id="header">
   <h1><a href=".">InstantClick</a></h1>
-  <div id="progress">Latest version: <strong><a href="https://raw.github.com/dieulot/instantclick/v1.0/instantclick.js" target="_blank">1.0</a></strong>, released 2014/01/08. <a href="https://twitter.com/instantclickjs" target="_blank" title="@instantclickjs">Follow progress on Twitter</a></div>
+  <div id="follow">Follow progress on Twitter: <a href="https://twitter.com/intent/follow?screen_name=instantclickjs" target="_blank"><i></i> @instantclickjs</a></div>
+  <div id="progress">Latest version: <strong><a href="start.html">1.1</a></strong>, released 2014/01/16.</div>
   <ul>
     <li><a href=".">Home</a>
+    <li><a href="start.html">Getting started</a>
     <li><a href="click-test.html">Click test</a>
-    <li><a href="whitelist.html">Whitelist</a>
-    <li><a href="license.html">License</a>
+    <li><a href="changelog.html">Changelog</a>
   </ul>
 </div>
 <h2>Click test</h2>
 
-<p>This page will tell you the delay between your hover/mousedown and click.
+<p>This page will tell you the delay between your hover/<wbr>mousedown/<wbr>touchstart and click.
 
 <table id="click-test">
   <tr>
@@ -30,24 +31,24 @@
     <td>
       <p>Click − Hover = <strong id="link1-click-hover"></strong><br>
       Click − Mousedown = <strong id="link1-click-mousedown"></strong>
-      <p class="times">Hover: <span id="link1-hover"></span><br>
-      Mousedown: <span id="link1-mousedown"></span><br>
-      Click: <span id="link1-click"></span>
+      <p>Click − Touchstart = <strong id="link1-click-touchstart"></strong><br>
+      <small>Click − Touchend = <strong id="link1-click-touchend"></strong></small>
     <td>
 
       <p>Click − Hover = <strong id="link2-click-hover"></strong><br>
       Click − Mousedown = <strong id="link2-click-mousedown"></strong>
-      <p class="times">Hover: <span id="link2-hover"></span><br>
-      Mousedown: <span id="link2-mousedown"></span><br>
-      Click: <span id="link2-click"></span>
+      <p>Click − Touchstart = <strong id="link2-click-touchstart"></strong><br>
+      <small>Click − Touchend = <strong id="link2-click-touchend"></strong></small> 
 </table>
+
+<p>For some reason, touchstart is approximately 400 ms if you tap fast, but 150–200 ms with a slower tap (in my tests, on iOS and Android 2.3). I have no idea why. If you do, please <a href="https://twitter.com/intent/tweet?status=@dieulot%20" target="_blank">tweet</a> or <a href="#adieulot_at_gmail" data-no-instant=email>email</a> me.
 
 <script>
 function $(id) {
   return document.getElementById(id)
 }
 
-var times = {hover: 0, mousedown: 0, click: 0}
+var times = {touchstart: 0, touchend: 0, hover: 0, mousedown: 0, click: 0}
 
 $('link1').addEventListener('mouseover', function() {
   times.hover = +new Date
@@ -63,24 +64,43 @@ $('link2').addEventListener('mousedown', function() {
   times.mousedown = +new Date
 })
 
+$('link1').addEventListener('touchstart', function() {
+  times.touchstart = +new Date
+})
+$('link2').addEventListener('touchstart', function() {
+  times.touchstart = +new Date
+})
+
+$('link1').addEventListener('touchend', function() {
+  times.touchend = +new Date
+})
+$('link2').addEventListener('touchend', function() {
+  times.touchend = +new Date
+})
+
+function delay(time) {
+  if (times[time] == 0)
+    return '∞'
+  return times.click - times[time] + ' ms'
+}
+
 $('link1').addEventListener('click', function(e) {
   e.preventDefault()
   times.click = +new Date
-  $('link1-hover').innerHTML = times.hover
-  $('link1-mousedown').innerHTML = times.mousedown
-  $('link1-click').innerHTML = times.click
-  $('link1-click-hover').innerHTML = (times.click - times.hover) + ' ms'
-  $('link1-click-mousedown').innerHTML = (times.click - times.mousedown) + ' ms'
+  $('link1-click-hover').innerHTML = delay('hover')
+  $('link1-click-mousedown').innerHTML = delay('mousedown')
+  $('link1-click-touchstart').innerHTML = delay('touchstart')
+  $('link1-click-touchend').innerHTML = delay('touchend')
 })
 $('link2').addEventListener('click', function(e) {
   e.preventDefault()
+  e.target.blur() 
   times.click = +new Date
-  $('link2-hover').innerHTML = times.hover
-  $('link2-mousedown').innerHTML = times.mousedown
-  $('link2-click').innerHTML = times.click
-  $('link2-click-hover').innerHTML = (times.click - times.hover) + ' ms'
-  $('link2-click-mousedown').innerHTML = (times.click - times.mousedown) + ' ms'
+  $('link2-click-hover').innerHTML = delay('hover')
+  $('link2-click-mousedown').innerHTML = delay('mousedown')
+  $('link2-click-touchstart').innerHTML = delay('touchstart')
+  $('link2-click-touchend').innerHTML = delay('touchend')
 })
 
 </script>
-<script src="script.js" data-no-instant></script>
+<script src="script-1.js" data-no-instant></script>
