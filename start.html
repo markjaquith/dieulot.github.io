@@ -1,90 +1,286 @@
 <!doctype html>
 <meta charset="utf-8">
 <title>InstantClick: Getting started</title>
-<link rel="stylesheet" href="style-1.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style-2.css">
+<meta name="viewport" content="width=720">
 <meta name="description" content="Get started with InstantClick.">
 <body>
 <div id="header">
   <h1><a href=".">InstantClick</a></h1>
-  <div id="follow">Follow progress on Twitter: <a href="https://twitter.com/intent/follow?screen_name=instantclickjs" target="_blank"><i></i> @instantclickjs</a></div>
-  <div id="progress">Latest version: <strong>1.1</strong>, released 2014/01/16.</div>
   <ul>
+    <li class="github"><a href="https://github.com/dieulot/instantclick" target="_blank" title="GitHub">Github</a>
+    <li class="twitter"><a href="https://twitter.com/instantclickjs" target="_blank" title="Twitter">Twitter</a>
     <li><a href=".">Home</a>
-    <li><a href="start.html">Getting started</a>
+    <li class="on"><a href="start.html">Getting started</a>
     <li><a href="click-test.html">Click test</a>
     <li><a href="changelog.html">Changelog</a>
   </ul>
 </div>
 <h2>Getting started</h2>
 
-<p>Grab InstantClick:
+<p>Grab InstantClick 2.0 <small>(2014/02/08)</small>.
 
-<p><a href="instantclick.min.js" target="_blank" class="download DOWNLOAD">Minified, for production</a> <small>1.4k when gzipped</small>
+<p><a href="instantclick.min.js" class="btn btn-big" download>Production version</a>   |  <a href="https://raw.github.com/dieulot/instantclick/v2.0/instantclick.js" download>Development version</a>
 
-<p><a href="https://raw.github.com/dieulot/instantclick/v1.1/instantclick.js" target="_blank" class="download">Unminified, for development</a> <small>6.2k</small>
+<p>InstantClick is 1.6kb when minified and gzipped (production version), and is dependency-free.
 
-<p>There are two ways to use InstantClick, by whitelisting what InstantClick preloads (default), or by blacklisting. In general, you’ll use whitelisting on an already made website, and blacklisting if you start one from scratch.
+<h3>Preloading options</h3>
 
-<h3>How to whitelist</h3>
+<p>InstantClick has three levels of preloading.
 
-<p>Add the following to your HTML, before <code>&lt;/body&gt;</code>:<br>
-<code>&lt;script src="instantclick.min.js" data-no-instant&gt;&lt;/script&gt;
-&lt;script data-no-instant&gt;InstantClick.init();&lt;/script&gt;</code>
+<h4>On hover</h4>
 
-<p>To whitelist a link, add a <code>data-instant</code> attribute to it:<br>
-<code>&lt;a href="other-page.html" <b>data-instant</b>&gt;This link will get preloaded.&lt;/a&gt;
-&lt;a href="/blog/"&gt;This link won’t.&lt;/a&gt;</code>
+Preloading kicks in when a user hovers over a link. If the user has a decent connection and your pages don’t take too long to be served, pages will display instantly.
 
-<p>What to <b>NOT</b> whitelist:
-  <ul>
-    <li>Links pointing to an action, such as delete and logout links.
-    <li>Links pointing to non-HTML content that take a while to load.
-    <li>Links pointing to a page with different styles/scripts in the <code>&lt;head&gt;</code>.
-  </ul>
+<p>Include InstantClick and initialize it near the end of your pages.
 
-
-<p>Some links can’t be preloaded: Links with a <code>target</code> attribute, with a different domain or protocol, or who points to an #anchor on the same page.
-
-<div class="blacklist">
-  <h3>How to blacklist</h3>
-
-  <p>Add instead the following to your HTML, before <code>&lt;/body&gt;</code>:<br>
-<code>&lt;script src="instantclick.min.js" data-no-instant&gt;&lt;/script&gt;
-&lt;script data-no-instant&gt;InstantClick.init(<b>true</b>);&lt;/script&gt;</code>
-
-  <p>All your links are now ready to get preloaded. To blacklist a link, add it a <code>data-no-instant</code> attribute.
-
-  <p>Links that can’t be preloaded are enumerated in “How to whitelist” above, they don’t need a <code>data-no-instant</code> attribute. To know what to blacklist check out “What to not whitelist” above.
+<div id="gist8879571" class="gist">
+<div class="gist-file">
+<div class="gist-data gist-syntax">
+<div class="file-data">
+<table cellpadding="0" cellspacing="0" class="lines highlight">
+<tr>
+<td class="line-numbers">
+<span class="line-number" id="file-gistfile1-html-L1" rel="file-gistfile1-html-L1">1</span>
+<span class="line-number" id="file-gistfile1-html-L2" rel="file-gistfile1-html-L2">2</span>
+<span class="line-number" id="file-gistfile1-html-L3" rel="file-gistfile1-html-L3">3</span>
+<span class="line-number" id="file-gistfile1-html-L4" rel="file-gistfile1-html-L4">4</span>
+<span class="line-number" id="file-gistfile1-html-L5" rel="file-gistfile1-html-L5">5</span>
+</td>
+<td class="line-data">
+<pre class="line-pre"><div class="line" id="file-gistfile1-html-LC1">...</div><div class="line" id="file-gistfile1-html-LC2"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;instantclick.min.js&quot;</span> <span class="na">data-no-instant</span><span class="nt">&gt;&lt;/script&gt;</span></div><div class="line" id="file-gistfile1-html-LC3"><span class="nt">&lt;script </span><span class="na">data-no-instant</span><span class="nt">&gt;</span><span class="nx">InstantClick</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span><span class="nt">&lt;/script&gt;</span></div><div class="line" id="file-gistfile1-html-LC4"><span class="nt">&lt;/body&gt;</span></div><div class="line" id="file-gistfile1-html-LC5"><span class="nt">&lt;/html&gt;</span></div></pre>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 </div>
 
-<h3 id="scripts">Scripts</h3>
+<h4>On hover after a delay</h4>
 
-<p>Besides the heavier load on your server, the real price to make your website instant is that you’ll have to revisit how your scripts are architectured. Because of AJAX, there’s no <code>DOMContentLoaded</code> firing on page changes anymore.
+<p>If the user is still hovering over a link after a delay of your choice has passed, the page will start preloading.
 
-<p>If there is a script in the body that you wish not to re-evaluate when InstantClick displays a page, add a <code>data-no-instant</code> attribute to it:<br>
-<code>&lt;script <b>data-no-instant</b>&gt;alert("I’m run only once.");&lt;/script&gt;
-&lt;script&gt;alert("I’m run every time a new page displays.");&lt;/script&gt;</code>
+<p>Recommended delays are 100 ms and 50 ms. More than 100 ms may actually be worse than on mousedown (see below), less than 50 ms likely won’t be perceptible.
 
-<p>You can have a callback executed on every page change by using <code>InstantClick.on('change', callback)</code>.<br>
-If you want the callback to be called on the initial page (you probably do), make sure to call <code>InstantClick.on</code> before <code>InstantClick.init</code>.
+<p>To make InstantClick preload after a delay, pass the delay in milliseconds as an argument to <code>InstantClick.init</code>.
 
-<p>For instance, here is how to make Google Analytics work with InstantClick:
-<code>&lt;script src="instantclick.min.js" data-no-instant&gt;&lt;/script&gt;
-&lt;script data-no-instant&gt;
-<small>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');</small>
+<div id="gist8879571" class="gist">
+<div class="gist-file">
+<div class="gist-data gist-syntax">
+<div class="file-data">
+<table cellpadding="0" cellspacing="0" class="lines highlight">
+<tr>
+<td class="line-numbers">
+<span class="line-number" id="file-gistfile1-js-L1" rel="file-gistfile1-js-L1">1</span>
+</td>
+<td class="line-data">
+<pre class="line-pre"><div class="line" id="file-gistfile1-js-LC1"><span class="nx">InstantClick</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span></div></pre>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
 
-ga('create', 'UA-XXXXXXXX-X', 'example.com');
+<h4>On mousedown</h4>
 
-InstantClick.on('change', function() {
-  ga('send', 'pageview');
-});
+<p>Preload when the user presses his mouse button (a click is when he releases it). This brings nearly zero overhead to your server and still bring a “magical” speed boost.
 
-InstantClick.init();
-&lt;/script&gt;</code>
+<p>To use, pass <code>'mousedown'</code> as an argument to <code>InstantClick.init</code>.
+
+<div id="gist8879571" class="gist">
+<div class="gist-file">
+<div class="gist-data gist-syntax">
+<div class="file-data">
+<table cellpadding="0" cellspacing="0" class="lines highlight">
+<tr>
+<td class="line-numbers">
+<span class="line-number" id="file-gistfile1-js-L1" rel="file-gistfile1-js-L1">1</span>
+</td>
+<td class="line-data">
+<pre class="line-pre"><div class="line" id="file-gistfile1-js-LC1"><span class="nx">InstantClick</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="s1">&#39;mousedown&#39;</span><span class="p">);</span></div></pre>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<h3>Whitelist or blacklist</h3>
+
+<p>You can either use InstantClick by whitelisting or blacklisting what it preloads.
+
+<p>In general, you’ll use whitelisting on an already made website, and blacklisting when you start one from scratch.
+
+<p>What to blacklist, and to NOT whitelist:
+
+<ul>
+  <li>Links pointing to an action, such as delete and logout links.
+  <li>Links pointing to non-HTML content that takes a while to load.
+  <li>Links pointing to a page with different styles/scripts in the <code>&lt;head&gt;</code>.
+</ul>
+
+<p>Some links cannot be preloaded:
+
+<ul>
+  <li>Links with a <code>target</code> or <code>download</code> attribute.
+  <li>Links with a different domain or protocol.
+  <li>Links who points to an #anchor on the same page.
+</ul>
+
+<h4>Whitelisting</h4>
+
+<p>To whitelist a link, add it a <code>data-instant</code> attribute.
+
+<div id="gist8879571" class="gist">
+<div class="gist-file">
+<div class="gist-data gist-syntax">
+<div class="file-data">
+<table cellpadding="0" cellspacing="0" class="lines highlight">
+<tr>
+<td class="line-numbers">
+<span class="line-number" id="file-gistfile1-html-L1" rel="file-gistfile1-html-L1">1</span>
+</td>
+<td class="line-data">
+<pre class="line-pre"><div class="line" id="file-gistfile1-html-LC1"><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;some-page.html&quot;</span> <span class="na">data-instant</span><span class="nt">&gt;</span>Link<span class="nt">&lt;/a&gt;</span></div></pre>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<h4>Blacklisting</h4>
+
+<p>First, pass a <code>true</code> argument to <code>InstantClick.init</code>.
+
+<div id="gist8879571" class="gist">
+<div class="gist-file">
+<div class="gist-data gist-syntax">
+<div class="file-data">
+<table cellpadding="0" cellspacing="0" class="lines highlight">
+<tr>
+<td class="line-numbers">
+<span class="line-number" id="file-gistfile1-js-L1" rel="file-gistfile1-js-L1">1</span>
+<span class="line-number" id="file-gistfile1-js-L2" rel="file-gistfile1-js-L2">2</span>
+<span class="line-number" id="file-gistfile1-js-L3" rel="file-gistfile1-js-L3">3</span>
+<span class="line-number" id="file-gistfile1-js-L4" rel="file-gistfile1-js-L4">4</span>
+<span class="line-number" id="file-gistfile1-js-L5" rel="file-gistfile1-js-L5">5</span>
+</td>
+<td class="line-data">
+<pre class="line-pre"><div class="line" id="file-gistfile1-js-LC1"><span class="nx">InstantClick</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span></div><div class="line" id="file-gistfile1-js-LC2"><span class="cm">/* or */</span></div><div class="line" id="file-gistfile1-js-LC3"><span class="nx">InstantClick</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span></div><div class="line" id="file-gistfile1-js-LC4"><span class="cm">/* or */</span></div><div class="line" id="file-gistfile1-js-LC5"><span class="nx">InstantClick</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="s1">&#39;mousedown&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span></div></pre>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<p>Then, to blacklist a link, add it a <code>data-no-instant</code> attribute.
+
+<div id="gist8879571" class="gist">
+<div class="gist-file">
+<div class="gist-data gist-syntax">
+<div class="file-data">
+<table cellpadding="0" cellspacing="0" class="lines highlight">
+<tr>
+<td class="line-numbers">
+<span class="line-number" id="file-gistfile1-html-L1" rel="file-gistfile1-html-L1">1</span>
+</td>
+<td class="line-data">
+<pre class="line-pre"><div class="line" id="file-gistfile1-html-LC1"><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/blog/&quot;</span> <span class="na">data-no-instant</span><span class="nt">&gt;</span>Link<span class="nt">&lt;/a&gt;</span></div></pre>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<h3>Dealing with scripts</h3>
+
+<p>Besides the heavier load on your server, the real price to make your website instant is that you’ll have to revisit how your scripts are architectured. Because InstantClick makes your website a single-page application, there’s no <code>DOMContentLoaded</code> firing on page changes anymore.
+
+<p>If there is a script in the body that you wish not to re-evaluate when InstantClick displays a page, add a <code>data-no-instant</code> attribute to it.
+
+<div id="gist8879571" class="gist">
+<div class="gist-file">
+<div class="gist-data gist-syntax">
+<div class="file-data">
+<table cellpadding="0" cellspacing="0" class="lines highlight">
+<tr>
+<td class="line-numbers">
+<span class="line-number" id="file-gistfile1-html-L1" rel="file-gistfile1-html-L1">1</span>
+</td>
+<td class="line-data">
+<pre class="line-pre"><div class="line" id="file-gistfile1-html-LC1"><span class="nt">&lt;script </span><span class="na">data-no-instant</span><span class="nt">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;I’m only run once.&quot;</span><span class="p">);</span><span class="nt">&lt;/script&gt;</span></div></pre>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<hr>
+
+<p>You can have a callback executed on every page change by using
+
+<div id="gist8879571" class="gist">
+<div class="gist-file">
+<div class="gist-data gist-syntax">
+<div class="file-data">
+<table cellpadding="0" cellspacing="0" class="lines highlight">
+<tr>
+<td class="line-numbers">
+<span class="line-number" id="file-gistfile1-js-L1" rel="file-gistfile1-js-L1">1</span>
+</td>
+<td class="line-data">
+<pre class="line-pre"><div class="line" id="file-gistfile1-js-LC1"><span class="nx">InstantClick</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span></div></pre>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<p>Make sure to call <code>InstantClick.on</code> before <code>InstantClick.init</code>, so that it runs on initial page load too (including when the browser doesn’t support pushState).
+
+<p>For instance, here is how you’d make Google Analytics work.
+
+<div id="gist8879571" class="gist">
+<div class="gist-file">
+<div class="gist-data gist-syntax">
+<div class="file-data">
+<table cellpadding="0" cellspacing="0" class="lines highlight">
+<tr>
+<td class="line-numbers">
+<span class="line-number" id="file-gistfile1-html-L1" rel="file-gistfile1-html-L1">1</span>
+<span class="line-number" id="file-gistfile1-html-L2" rel="file-gistfile1-html-L2">2</span>
+<span class="line-number" id="file-gistfile1-html-L3" rel="file-gistfile1-html-L3">3</span>
+<span class="line-number" id="file-gistfile1-html-L4" rel="file-gistfile1-html-L4">4</span>
+<span class="line-number" id="file-gistfile1-html-L5" rel="file-gistfile1-html-L5">5</span>
+<span class="line-number" id="file-gistfile1-html-L6" rel="file-gistfile1-html-L6">6</span>
+<span class="line-number" id="file-gistfile1-html-L7" rel="file-gistfile1-html-L7">7</span>
+<span class="line-number" id="file-gistfile1-html-L8" rel="file-gistfile1-html-L8">8</span>
+<span class="line-number" id="file-gistfile1-html-L9" rel="file-gistfile1-html-L9">9</span>
+<span class="line-number" id="file-gistfile1-html-L10" rel="file-gistfile1-html-L10">10</span>
+</td>
+<td class="line-data">
+<pre class="line-pre"><div class="line" id="file-gistfile1-html-LC1"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;instantclick.min.js&quot;</span> <span class="na">data-no-instant</span><span class="nt">&gt;&lt;/script&gt;</span></div><div class="line" id="file-gistfile1-html-LC2"><span class="nt">&lt;script </span><span class="na">data-no-instant</span><span class="nt">&gt;</span></div><div class="line" id="file-gistfile1-html-LC3"><span class="cm">/* Google Analytics code here, without ga(&#39;send&#39;, &#39;pageview&#39;) */</span></div><div class="line" id="file-gistfile1-html-LC4">&nbsp;</div><div class="line" id="file-gistfile1-html-LC5"><span class="nx">InstantClick</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span></div><div class="line" id="file-gistfile1-html-LC6">  <span class="nx">ga</span><span class="p">(</span><span class="s1">&#39;send&#39;</span><span class="p">,</span> <span class="s1">&#39;pageview&#39;</span><span class="p">,</span> <span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span> <span class="o">+</span> <span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="p">);</span></div><div class="line" id="file-gistfile1-html-LC7"><span class="p">});</span></div><div class="line" id="file-gistfile1-html-LC8">&nbsp;</div><div class="line" id="file-gistfile1-html-LC9"><span class="nx">InstantClick</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span></div><div class="line" id="file-gistfile1-html-LC10"><span class="nt">&lt;/script&gt;</span></div></pre>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
 
 <p>If you have other third-party scripts that fail with InstantClick, you might get an idea on how to work around the problem by checking the <a href="http://reed.github.io/turbolinks-compatibility/" target="_blank">Turbolinks Compatibility</a> project.
-<script src="script-1.js" data-no-instant></script>
+<script src="script-2.js" data-no-instant></script>

@@ -1,35 +1,45 @@
 <!doctype html>
 <meta charset="utf-8">
 <title>InstantClick: Changelog</title>
-<link rel="stylesheet" href="style-1.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style-2.css">
+<meta name="viewport" content="width=720">
 <meta name="description" content="InstantClick’s progress across versions.">
 <body>
 <div id="header">
   <h1><a href=".">InstantClick</a></h1>
-  <div id="follow">Follow progress on Twitter: <a href="https://twitter.com/intent/follow?screen_name=instantclickjs" target="_blank"><i></i> @instantclickjs</a></div>
-  <div id="progress">Latest version: <strong>1.1</strong>, released 2014/01/16.</div>
   <ul>
+    <li class="github"><a href="https://github.com/dieulot/instantclick" target="_blank" title="GitHub">Github</a>
+    <li class="twitter"><a href="https://twitter.com/instantclickjs" target="_blank" title="Twitter">Twitter</a>
     <li><a href=".">Home</a>
     <li><a href="start.html">Getting started</a>
     <li><a href="click-test.html">Click test</a>
-    <li><a href="changelog.html">Changelog</a>
+    <li class="on"><a href="changelog.html">Changelog</a>
   </ul>
 </div>
 <h2>Changelog</h2>
 
+<h3>1.2 (2014/02/08)</h3>
+
+<ul>
+  <li>Option to set a delay before preloading starts.
+  <li>Option to preload on mousedown.
+  <li>Prevent the “preload, display, re-preload” situation by not preloading if a page has been displayed in the last 100 ms.
+  <li>Set body’s outerHTML instead of innerHTML on page change.
+  <li>Bugfix: Scroll correctly when using the browser’s back or forward button.
+</ul>
+
 <h3>1.1 (2014/01/16)</h3>
 
 <ul>
-  <li>Bugfix: <code>&lt;a&gt;</code> elements can now contain child elements.
-  <li>Redirect if we’ve preloaded non-HTML content.
-  <li><code>InstantClick.supported</code>.
   <li>Whitelist mode.
-  <li>Bugfix on the browser’s back/forward button.
   <li><code>InstantClick.on</code>.
+  <li><code>InstantClick.supported</code>.
+  <li>Redirect if we’ve preloaded non-HTML content.
+  <li>Bugfix: <code>&lt;a&gt;</code> elements can now contain child elements.
+  <li>Bugfix on the browser’s back/forward button.
 </ul>
 
 <h3>1.0 (2014/01/08)</h3>
 
 <p>Initial release.
-<script src="script-1.js" data-no-instant></script>
+<script src="script-2.js" data-no-instant></script>

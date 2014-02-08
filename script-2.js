@@ -7,3 +7,20 @@ a.isPreloading&&a.isWaitingForCompletion||(a.isPreloading=!0,a.isWaitingForCompl
 !1;w(a.body);g.title=a.title;c=a.url.indexOf("#");c=-1<c&&g.getElementById(a.url.substr(c+1));var b=0;if(a.url!=h.href&&c)for(;c.offsetParent;c=c.offsetParent)b+=c.offsetTop;scrollTo(0,b);history.pushState(null,null,a.url);k=m(h.href);r()}else a.isWaitingForCompletion=!0;else h.href=a.url}var k,x,d,e={},a={},s,t,q,p={change:[]},u="pushState"in history;return{supported:u,init:function(){if(!u)v("change");else if(!k){for(var c=0;c<arguments.length;c++){var b=arguments[c];!0===b?s=!0:"mousedown"==b?
 t=!0:"number"==typeof b&&(q=b)}k=m(h.href);e[k]={body:g.body.outerHTML,title:g.title,scrollY:pageYOffset};a.xhr=new XMLHttpRequest;a.xhr.addEventListener("readystatechange",D);a.url=!1;a.body=!1;a.hasBody=!0;a.title=!1;a.isPreloading=!1;a.isWaitingForCompletion=!1;a.timing={};r(!0);addEventListener("popstate",function(){var a=m(h.href);a!=k&&(a in e?(e[k].scrollY=pageYOffset,k=a,w(e[a].body),scrollTo(0,e[a].scrollY),g.title=e[a].title,r()):h.href=h.href)})}},on:function(a,b){p[a].push(b)},debug:function(){return{currentLocationWithoutHash:k,
 p:a,pHistory:e,supported:u,useBlacklist:s}}}}(document,location);
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-46962315-1', 'instantclick.io');
+
+InstantClick.on('change', function() {
+	ga('send', 'pageview', location.pathname + location.search);
+	var emails = document.querySelectorAll('a[data-no-instant=email]')
+	for (var i = 0; i < emails.length; i++) {
+		emails[i].href = 'mailto:' + ['adieulot', 'gmail.com'].join('@')
+	}
+})
+
+InstantClick.init(true)
