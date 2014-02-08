@@ -39,10 +39,6 @@
       <p>Click − Touchstart = <strong id="link2-click-touchstart"></strong>
 </table>
 
-<p>For some reason, touchstart is approximately 400 ms if you tap fast, but 150–200 ms with a slower tap (in my tests, on iOS and Android 2.3). touchend exhibits a similar behavior. I have no idea why. If you do, please <a href="https://twitter.com/intent/tweet?status=@dieulot%20" target="_blank">tweet</a> or <a href="#adieulot_at_gmail" data-no-instant=email>email</a> me.
-
-<p id="test">
-
 <script>
 function $(id) {
   return document.getElementById(id)
@@ -74,7 +70,6 @@ $('link1').addEventListener('touchstart', function() {
 })
 $('link2').addEventListener('touchstart', function() {
   times.touchstart = +new Date
-  //$('test').innerHTML += '<br>' + times.touchstart
 })
 
 function delay(time) {
@@ -97,7 +92,6 @@ $('link2').addEventListener('click', function(e) {
   $('link2-click-hover').innerHTML = delay('hover')
   $('link2-click-mousedown').innerHTML = delay('mousedown')
   $('link2-click-touchstart').innerHTML = delay('touchstart')
-  //$('test').innerHTML += ' – ' + times.click
 })
 
 </script>
