@@ -1,7 +1,7 @@
 <!doctype html>
 <meta charset="utf-8">
 <title>InstantClick: Getting started</title>
-<link rel="stylesheet" href="style-2.css">
+<link rel="stylesheet" href="style-3.css">
 <meta name="viewport" content="width=720">
 <meta name="description" content="Get started with InstantClick.">
 <body>
@@ -18,11 +18,13 @@
 </div>
 <h2>Getting started</h2>
 
-<p>Grab InstantClick 2.0 <small>(2014/02/08)</small>.
+<p>Grab InstantClick 2.1 <small>(2014/02/09)</small>.
 
-<p><a href="instantclick.min.js" class="btn btn-big" download>Production version</a>   |  <a href="https://raw.github.com/dieulot/instantclick/v2.0/instantclick.js" download>Development version</a>
+<p><a href="instantclick.min.js?2.1" class="btn btn-big" download>Production version</a>   |  <a href="https://raw.github.com/dieulot/instantclick/v2.1/instantclick.js" download>Development version</a>
 
 <p>InstantClick is 1.6kb when minified and gzipped (production version), and is dependency-free.
+
+<p class="warning"><strong>Upgrading from 2.0?</strong> In 2.1 blacklisting is now the default, see <a href="#whitelist_blacklist">Blacklist or whitelist</a> if your website is already using InstantClick.
 
 <h3>Preloading options</h3>
 
@@ -30,7 +32,7 @@
 
 <h4>On hover</h4>
 
-Preloading kicks in when a user hovers over a link. If the user has a decent connection and your pages don’t take too long to be served, pages will display instantly.
+<p>Preloading kicks in when a user hovers over a link. If the user has a decent connection and your pages don’t take too long to be served, pages will display instantly.
 
 <p>Include InstantClick and initialize it near the end of your pages.
 
@@ -56,8 +58,6 @@ Preloading kicks in when a user hovers over a link. If the user has a decent con
 </div>
 </div>
 </div>
-
-<p>Then check <a href="#whitelist_blacklist">Whitelist or blacklist</a> to enable links to be preloaded.
 
 <h4>On hover after a delay</h4>
 
@@ -111,11 +111,11 @@ Preloading kicks in when a user hovers over a link. If the user has a decent con
 </div>
 </div>
 
-<h3 id="whitelist_blacklist">Whitelist or blacklist</h3>
+<h3 id="whitelist_blacklist">Blacklist or whitelist</h3>
 
-<p>You can either use InstantClick by whitelisting or blacklisting what it preloads.
+<p>You can either use InstantClick by blacklisting (default) or whitelisting what it preloads.
 
-<p>In general, you’ll use whitelisting on an already made website, and blacklisting when you start one from scratch.
+<p>In general, you’ll use blacklisting when you start a website from scratch, or when your website consists of few pages; you’ll use whitelisting when your website is already complex.
 
 <p>What to blacklist, and to NOT whitelist:
 
@@ -133,9 +133,9 @@ Preloading kicks in when a user hovers over a link. If the user has a decent con
   <li>Links who points to an #anchor on the same page.
 </ul>
 
-<h4>Whitelisting</h4>
+<h4>Blacklisting</h4>
 
-<p>To whitelist a link, add it a <code>data-instant</code> attribute.
+<p>Then, to blacklist a link, add it a <code>data-no-instant</code> attribute.
 
 <div id="gist8879571" class="gist">
 <div class="gist-file">
@@ -147,7 +147,7 @@ Preloading kicks in when a user hovers over a link. If the user has a decent con
 <span class="line-number" id="file-gistfile1-html-L1" rel="file-gistfile1-html-L1">1</span>
 </td>
 <td class="line-data">
-<pre class="line-pre"><div class="line" id="file-gistfile1-html-LC1"><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;some-page.html&quot;</span> <span class="na">data-instant</span><span class="nt">&gt;</span>Link<span class="nt">&lt;/a&gt;</span></div></pre>
+<pre class="line-pre"><div class="line" id="file-gistfile1-html-LC1"><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/blog/&quot;</span> <span class="na">data-no-instant</span><span class="nt">&gt;</span>Link<span class="nt">&lt;/a&gt;</span></div></pre>
 </td>
 </tr>
 </table>
@@ -156,9 +156,9 @@ Preloading kicks in when a user hovers over a link. If the user has a decent con
 </div>
 </div>
 
-<h4>Blacklisting</h4>
+<h4>Whitelisting</h4>
 
-<p>First, pass a <code>true</code> argument to <code>InstantClick.init</code>.
+<p>To enable whitelisting, pass a <code>true</code> argument to <code>InstantClick.init</code>.
 
 <div id="gist8879571" class="gist">
 <div class="gist-file">
@@ -183,7 +183,7 @@ Preloading kicks in when a user hovers over a link. If the user has a decent con
 </div>
 </div>
 
-<p>Then, to blacklist a link, add it a <code>data-no-instant</code> attribute.
+<p>To whitelist a link, add it a <code>data-instant</code> attribute.
 
 <div id="gist8879571" class="gist">
 <div class="gist-file">
@@ -195,7 +195,7 @@ Preloading kicks in when a user hovers over a link. If the user has a decent con
 <span class="line-number" id="file-gistfile1-html-L1" rel="file-gistfile1-html-L1">1</span>
 </td>
 <td class="line-data">
-<pre class="line-pre"><div class="line" id="file-gistfile1-html-LC1"><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/blog/&quot;</span> <span class="na">data-no-instant</span><span class="nt">&gt;</span>Link<span class="nt">&lt;/a&gt;</span></div></pre>
+<pre class="line-pre"><div class="line" id="file-gistfile1-html-LC1"><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;some-page.html&quot;</span> <span class="na">data-instant</span><span class="nt">&gt;</span>Link<span class="nt">&lt;/a&gt;</span></div></pre>
 </td>
 </tr>
 </table>
@@ -285,4 +285,4 @@ Preloading kicks in when a user hovers over a link. If the user has a decent con
 </div>
 
 <p>If you have other third-party scripts that fail with InstantClick, you might get an idea on how to work around the problem by checking the <a href="http://reed.github.io/turbolinks-compatibility/" target="_blank">Turbolinks Compatibility</a> project.
-<script src="script-2.js" data-no-instant></script>
+<script src="script-3.js" data-no-instant></script>
