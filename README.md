@@ -1,0 +1,1 @@
+This repo is only the output of my own (clunky, PHP-y) static site generator for [InstantClick’s website](http://instantclick.io/), and is thus not really interesting.
